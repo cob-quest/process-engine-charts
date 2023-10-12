@@ -5,18 +5,18 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: "process-engine"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "go-process-engine"
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Automatically mount a ServiceAccount's API credentials?
   automount: true
   # Annotations to add to the service account
@@ -26,7 +26,10 @@ serviceAccount:
   name: ""
 
 podAnnotations: {}
-podLabels: {}
+podLabels:
+  deployment:
+    processEngine: 
+      name: goProcessEngine
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -40,8 +43,15 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  enabled: false
   type: ClusterIP
   port: 80
+
+deployment:
+  goProcessEngine:
+    port: 5050
+  probes:
+    enabled: false
 
 ingress:
   enabled: false
