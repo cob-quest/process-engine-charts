@@ -90,14 +90,14 @@ autoscaling:
 
 # Additional volumes on the output Deployment definition.
 volumes:
-  - name: env-secret
+  - name: cob-secrets
     secret:
-      secretName: env-secret
+      secretName: cob-secrets
 
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts: 
-  - name: env-secret
+  - name: cob-secrets
     mountPath: "/etc/.env"
     subPath: .env
 
